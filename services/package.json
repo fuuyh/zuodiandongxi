@@ -4,24 +4,41 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "dev": "ts-node src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@9.1.0+sha1.217063ce3fcbf44f3051666f38b810f1ddefee4a",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "@prisma/client": "^6.7.0",
     "bcryptjs": "^3.0.2",
+    "class-transformer": "^0.5.1",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "koa": "^3.0.0",
+    "koa-body": "^6.0.1",
     "koa-bodyparser": "^4.4.1",
+    "koa-logger": "^3.2.1",
     "koa-router": "^13.0.1",
     "mysql2": "^3.14.1",
     "nodemon": "^3.1.10",
     "prisma": "^6.7.0",
+    "prisma-pagination": "^0.2.3",
+    "reflect-metadata": "^0.2.2",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/koa": "^2.15.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
+    "@types/node": "^22.15.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
