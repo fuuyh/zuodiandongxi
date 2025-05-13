@@ -35,16 +35,16 @@ export interface Role {
   role_name: string;
   role_key: string;
   role_sort: number;
-  data_scope?: string;
-  menu_check_strictly?: boolean;
-  dept_check_strictly?: boolean;
+  data_scope?: string | null;
+  menu_check_strictly?: boolean | null;
+  dept_check_strictly?: boolean | null;
   status: string;
-  del_flag?: string;
-  create_by?: string;
-  create_time?: Date;
-  update_by?: string;
-  update_time?: Date;
-  remark?: string;
+  del_flag?: string | null;
+  create_by?: string | null;
+  create_time?: Date | null;
+  update_by?: string | null;
+  update_time?: Date | null;
+  remark?: string | null;
 }
 // 角色菜单
 export interface RoleMenu {

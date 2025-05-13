@@ -9,10 +9,17 @@ class User {
     if (!user) return null;
     return user;
   }
+  // 根据用户名查询用户
+  static async findByUsername(username: string): Promise<UserType | null> {
+    const user = await prisma.sys_user.findUnique({ where: { user_name: username } });
+    // 使用 plainToInstance 方法进行类型转换
+    if (!user) return null;
+    return user;
+  }
   // 获取所有用户
   static async findAll(
-    pageNum: number = 1,
-    pageSize: number = 10
+    pageNum: number,
+    pageSize: number
   ): Promise<Page<UserType>> {
     const [total, data] = await Promise.all([
       prisma.sys_user.count(),

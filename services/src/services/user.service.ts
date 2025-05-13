@@ -1,16 +1,11 @@
-const User = require('../models/User');
-const uuid = require('../utils/genUUID')
-import { User as UserType } from '@/types';
-// 注册用户
-async function registerUser(user:UserType):Promise<boolean> {
-  const existingUser = await User.findUnique({ where: { user_name: user.user_name } });
-  if (existingUser) return false;
-  const hashedPassword = await bcrypt.hash(user.password);
-  user.id = uuid();
-  user.password = hashedPassword;
-  return User.createUser({
-    data: user
-  });
+const User = require('@/models/User');
+import { User as UserType,Page } from '@/types';
+
+
+// 根据用户名查询是否存在
+async function getUserByName(name:string):Promise<UserType | null> {
+  const user = await User.findByUsername(name);
+  return user;
 }
 // 更新用户信息
 async function updateUser(id:string, data:UserType):Promise<boolean> {
@@ -34,12 +29,19 @@ async function enableUser(id:string):Promise<boolean> {
   });
   return bool;
 }
-// 获取所有用户
-async function getAllUsers():Promise<UserType[]> {
-  const users = await User.findAll();
-  return users;
+// 获取所有用户 分页查询
+async function getAllUsers(pageNum:number, pageSize:number):Promise<Page<UserType>> {
+  return await User.findAll(pageNum, pageSize);
+}
+// 获取用户信息
+async function getUserById(id:string):Promise<UserType> {
+  return await User.findById(id);
+}
+// 删除用户 
+async function deleteUser(id:string):Promise<boolean> {
+  return await User.deleteUser(id);
 }
 
 export default {
-  registerUser,updateUser
+  updateUser,disableUser,enableUser,getAllUsers,getUserById,deleteUser,getUserByName
 };

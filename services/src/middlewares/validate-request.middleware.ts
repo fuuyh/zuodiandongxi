@@ -6,7 +6,7 @@ import { validateOrReject, ValidationError } from 'class-validator';
  * 通用请求校验中间件
  * @param dtoClass DTO 类型
  */
-export const validateRequest = <T>(dtoClass: new () => T) => {
+export const validateRequest = <T extends object>(dtoClass: new () => T) => {
   return async (ctx: Context, next: Next) => {
     try {
       const requestData = ctx.request.body;
@@ -37,4 +37,4 @@ export const validateRequest = <T>(dtoClass: new () => T) => {
       };
     }
   };
-}; 
+};

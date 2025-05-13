@@ -1,43 +1,34 @@
 const Role = require('../models/Role');
-const UUID = require('../utils/genUUID');
-const pagination = require('prisma-pagination');
+import { uuid } from "@/utils/genUUID";
+import { Role as RoleType, Page } from '@/types';
 
 // 创建角色
-async function createRole(data) {
-  data.id = UUID();
-  const role = await Role.createRole(data);
-  return role;
+async function createRole(data:RoleType):Promise<boolean> {
+  data.id = uuid();
+  return await Role.createRole(data);
 }
 
-// 获取所有角色
-async function findAllRoles(page, pageSize) {
-  const result = await pagination({
-    model: Role,
-    page,
-    pageSize,
-    // 可选：添加查询条件、排序等
-    where: {},     // 过滤条件
-    orderBy: { id: 'asc' },  // 排序方式
-  });
-  return result;
+// 获取所有角色 分页
+async function findAllRoles(pageNum:number, pageSize:number):Promise<Page<RoleType>> {
+  return await Role.findAll(pageNum, pageSize);
 }
+
 // 获取单个角色
-async function findRoleById(id) {
-  const role = await Role.findRoleById(id);
-  return role;
+async function findRoleById(id:string): Promise<RoleType | null>{
+  return await Role.findRoleById(id);
 }
 // 更新角色
-async function updateRole(id, data) {
-  
-  return await Role.updateRole(id, data);
+async function updateRole(data:RoleType) {
+
+  return await Role.updateRole(data);
 }
 // 删除角色
-async function deleteRole(id) {
-  
+async function deleteRole(id:string) {
+
   return await Role.deleteRole(id);
 }
 
-module.exports = {
+export default {
   createRole,
   findAllRoles,
   findRoleById,

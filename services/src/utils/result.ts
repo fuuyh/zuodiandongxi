@@ -1,10 +1,6 @@
 export default {
-  ok(msg = '操作成功', data = null) {
-    return {
-      code: 200,
-      msg,
-      data,
-    };
+  ok<T>(message: string, data: T = null as T) {
+    return { success: true, message, data, code: 200 };
   },
   err(msg = '操作失败', detail = null) {
     return {

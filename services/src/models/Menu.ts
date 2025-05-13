@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 class Menu {
   // 获取所有菜单,并且分页
   static async findAll(
-    pageNum: number = 1,
-    pageSize: number = 10
+    pageNum: number,
+    pageSize: number
   ): Promise<Page<MenuType>> {
     const [total, data] = await Promise.all([
       prisma.sys_menu.count(),
@@ -30,10 +30,10 @@ class Menu {
   }
 
   // 更新菜单
-  static async updateMenu(id: string, data: MenuType): Promise<boolean> {
+  static async updateMenu(data: MenuType): Promise<boolean> {
     try {
       await prisma.sys_menu.update({
-        where: { id },
+        where: { id: data.id },
         data,
       });
       return true;

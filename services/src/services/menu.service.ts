@@ -1,11 +1,10 @@
 const Menu = require('../models/Menu');
-const uuid = require('../utils/genUUID')
-import { Menu as MenuType, MenuTree } from '@/types';
+import { uuid } from "@/utils/genUUID";
+import { Menu as MenuType, MenuTree,Page } from '@/types';
 
 // 获取所有菜单,并且分页
-async function getAllMenus(pageNum:number = 1, pageSize:number = 10):Promise<{ data: MenuType[]; total: number }> {
-  const { data, total } = await Menu.findAll(pageNum, pageSize);
-  return { data, total };
+async function getAllMenus(pageNum:number, pageSize:number):Promise<Page<MenuTree>> {
+  return await Menu.findAll(pageNum, pageSize);
 }
 
 // 创建菜单
@@ -17,9 +16,8 @@ async function createMenu(data:MenuType):Promise<boolean> {
   return bool;
 }
 // 更新菜单
-async function updateMenu(id:string, data:MenuType):Promise<boolean> {
+async function updateMenu(data:MenuType):Promise<boolean> {
   const bool = await Menu.updateMenu({
-    id,
     data
   });
   return bool;

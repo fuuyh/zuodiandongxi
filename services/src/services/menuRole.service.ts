@@ -1,24 +1,23 @@
 const MenuRole = require('../models/MenuRole');
-
+import { RoleMenu } from '@/types';
 // 创建菜单角色关联
-async function createMenuRole(menuId, roleId) {
-  return await MenuRole.createMenuRole(menuId, roleId);
+async function createMenuRole(roleMenu: RoleMenu) {
+  return await MenuRole.createMenuRole(roleMenu);
 }
 
 // 删除菜单角色关联
-async function deleteMenuRole(menuId, roleId) {
-  return await MenuRole.deleteMenuRole(menuId, roleId);
+async function deleteMenuRole(roleMenu: RoleMenu) {
+  return await MenuRole.deleteMenuRole(roleMenu);
 }
 
 // 根据角色id获取菜单列表
-async function getMenusByRoleId(roleId) {
+async function getMenusByRoleId(roleId: string) {
   return await MenuRole.getMenusByRoleId(roleId);
 }
 
 // 导出
 
-module.exports = {
-  
+export default {
   createMenuRole,
   deleteMenuRole,
   getMenusByRoleId
