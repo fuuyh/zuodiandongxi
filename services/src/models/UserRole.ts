@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { UserRole as UserRoleType } from '@/types';
 const prisma = new PrismaClient();
-class UserRole {
+export default class UserRole {
   // 创建用户角色关联
   static async createUserRole(data: UserRoleType): Promise<boolean> {
     try {
@@ -50,5 +50,3 @@ class UserRole {
   }
 
 }
-
-module.exports = UserRole;

@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { User as UserType,Page } from '@/types';
 const prisma = new PrismaClient();
 
-class User {
+export default class User {
   static async findById(id: string): Promise<UserType | null> {
     const user = await prisma.sys_user.findUnique({ where: { id } });
     // 使用 plainToInstance 方法进行类型转换
@@ -82,5 +82,3 @@ class User {
   }
 
 }
-
-module.exports = User;

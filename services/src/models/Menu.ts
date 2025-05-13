@@ -2,9 +2,9 @@ import { PrismaClient } from '@prisma/client'
 import { Menu as MenuType, MenuTree,Page } from '@/types';
 const prisma = new PrismaClient();
 
-class Menu {
+export default class Menu {
   // 获取所有菜单,并且分页
-  static async findAll(
+  static async findAllPage(
     pageNum: number,
     pageSize: number
   ): Promise<Page<MenuType>> {
@@ -16,6 +16,10 @@ class Menu {
       }),
     ]);
     return { records: data, total, current: pageNum, size: pageSize };
+  }
+    // 获取所有菜单,并且分页
+  static async findAll(): Promise<MenuType[]> {
+    return await prisma.sys_menu.findMany();
   }
 
   // 创建菜单
@@ -101,5 +105,3 @@ class Menu {
     return result;
   }
 }
-
-module.exports = Menu;

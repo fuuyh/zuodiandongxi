@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { RoleMenu } from '@/types';
 const prisma = new PrismaClient();
 
-class MenuRole {
+export default class MenuRole {
   // 创建用户角色关联
   static async createMenuRole(roleMenu: RoleMenu): Promise<boolean> {
     try {
@@ -53,5 +53,3 @@ class MenuRole {
     }
   }
 }
-
-module.exports = MenuRole;

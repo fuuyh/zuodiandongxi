@@ -1,15 +1,19 @@
 import { Context } from 'koa';
 import Result from '../utils/result';
 import menuService from '../services/menu.service';
-import { MenuTree,Page } from '@/types';
+import { MenuTree, Page } from '@/types';
 
 class MenuController {
   // 获取所有菜单 分页
+  // async getAllMenus(ctx: Context) {
+  //   const page = Number(ctx.query.page) || 1; // 默认值为 1
+  //   const size = Number(ctx.query.size) || 10; // 默认值为 10
+  //   const menus = await menuService.getAllMenus(page, size);
+  //   ctx.body = Result.ok<Page<MenuTree>>('获取所有菜单成功', menus);
+  // }
   async getAllMenus(ctx: Context) {
-    const page = Number(ctx.query.page) || 1; // 默认值为 1
-    const size = Number(ctx.query.size) || 10; // 默认值为 10
-    const menus = await menuService.getAllMenus(page, size);
-    ctx.body = Result.ok<Page<MenuTree>>('获取所有菜单成功', menus);
+    const menus = await menuService.getAllMenus();
+    ctx.body = Result.ok<MenuTree[]>('获取所有菜单成功', menus);
   }
   // 获取所有菜单树
   async getAllMenusTree(ctx: Context) {

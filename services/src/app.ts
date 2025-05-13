@@ -1,11 +1,11 @@
-// app.ts 修改后的代码
+import 'reflect-metadata';
 import Koa from 'koa';
 import koaBody from 'koa-body';
 import errorMiddleware from './middlewares/error.middleware';
 import authRoutes from './routes/auth.routes';
+import menuRoutes from './routes/menu.routes';
 import cors from '@koa/cors';
 import logger from 'koa-logger';
-import 'reflect-metadata';
 
 const app = new Koa();
 
@@ -18,6 +18,7 @@ app.use(logger());
 
 // Routes
 app.use(authRoutes.routes()).use(authRoutes.allowedMethods());
+app.use(menuRoutes.routes()).use(menuRoutes.allowedMethods());
 
 // 错误处理（全局错误监听）
 app.on('error', (err, ctx) => {

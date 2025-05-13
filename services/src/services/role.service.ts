@@ -1,5 +1,5 @@
-const Role = require('../models/Role');
-import { uuid } from "@/utils/genUUID";
+import Role from '../models/Role';
+import { uuid } from "../utils/genUUID";
 import { Role as RoleType, Page } from '@/types';
 
 // 创建角色

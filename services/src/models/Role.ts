@@ -1,22 +1,22 @@
 import { PrismaClient } from '@prisma/client'
-import { Role as RoleType,Page } from '@/types';
+import { Role as RoleType, Page } from '@/types';
 const prisma = new PrismaClient();
 
-class Role {
+export default class Role {
   // 获取所有角色并且分页
-    static async findAll(
-      pageNum: number,
-      pageSize: number
-    ): Promise<Page<RoleType>> {
-      const [total, data] = await Promise.all([
-        prisma.sys_role.count(),
-        prisma.sys_role.findMany({
-          skip: (pageNum - 1) * pageSize,
-          take: pageSize,
-        }),
-      ]);
-      return { records: data, total, current: pageNum, size: pageSize };
-    }
+  static async findAll(
+    pageNum: number,
+    pageSize: number
+  ): Promise<Page<RoleType>> {
+    const [total, data] = await Promise.all([
+      prisma.sys_role.count(),
+      prisma.sys_role.findMany({
+        skip: (pageNum - 1) * pageSize,
+        take: pageSize,
+      }),
+    ]);
+    return { records: data, total, current: pageNum, size: pageSize };
+  }
 
   // 根据ID获取角色
   static async findRoleById(id: string): Promise<RoleType | null> {
@@ -27,10 +27,15 @@ class Role {
     });
   }
   // 创建角色
-  static async createRole(data:RoleType) {
-    return await prisma.sys_role.create({
-      data,
-    });
+  static async createRole(data: RoleType): Promise<boolean> {
+    try {
+      await prisma.sys_role.create({
+        data,
+      })
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   // 更新角色
@@ -50,7 +55,5 @@ class Role {
       },
     });
   }
-  
-}
 
-module.exports = Role;
+}

@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import authService from '@/services/auth.service'
+import authService from '../services/auth.service'
 import Result from '../utils/result';
 import { User, UserLogin } from '@/types';
 
