@@ -30,7 +30,8 @@
     "prisma": "^6.7.0",
     "prisma-pagination": "^0.2.3",
     "reflect-metadata": "^0.2.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+		"class-validator": "^0.14.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.9",
@@ -39,6 +40,8 @@
     "@types/koa-router": "^7.4.8",
     "@types/node": "^22.15.17",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@types/koa-logger": "^3.1.5",
+		"@types/koa__cors": "^5.0.0"
   }
 }
