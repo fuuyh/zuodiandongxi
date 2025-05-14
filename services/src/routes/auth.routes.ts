@@ -6,6 +6,7 @@ import { UserEntity } from '../entities/User.entity';
 
 const authRouter = new Router({ prefix: '/api/auth' });
 authRouter.post('/register', validateRequest(UserEntity), register);
+// authRouter.post('/register', register);
 authRouter.post('/login', login);
 
 export default authRouter;

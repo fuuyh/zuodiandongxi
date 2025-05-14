@@ -72,6 +72,46 @@ class RoleController {
     const users = await userRoleService.getRolesByUserId(id);
     ctx.body = Result.ok('获取角色用户权限成功', users);
   }
+  // 创建角色的用户权限
+  async createRoleUsers(ctx: Context) {
+    const dto: UserRole = ctx.state.dto; // 已经经过校验的 DTO 对象
+    const success = await userRoleService.createUserRole(dto);
+    if (success) {
+      ctx.body = Result.ok('创建角色用户权限成功');
+    } else {
+      ctx.body = Result.err('创建角色用户权限失败');
+    }
+  }
+  // 删除角色的用户权限
+  async deleteRoleUsers(ctx: Context) {
+    const dto: UserRole = ctx.state.dto; // 已经经过校验的 DTO 对象
+    const success = await userRoleService.deleteUserRole(dto);
+    if (success) {
+      ctx.body = Result.ok('删除角色用户权限成功');
+    } else {
+      ctx.body = Result.err('删除角色用户权限失败');
+    }
+  }
+  // 创建角色的菜单权限
+  async createRoleMenus(ctx: Context) {
+    const dto: RoleMenu = ctx.state.dto; // 已经经过校验的 DTO 对象
+    const success = await menuRoleService.createMenuRole(dto);
+    if (success) {
+      ctx.body = Result.ok('创建角色菜单权限成功');
+    } else {
+      ctx.body = Result.err('创建角色菜单权限失败');
+    }
+  }
+  // 删除角色的菜单权限
+  async deleteRoleMenus(ctx: Context) {
+    const dto: RoleMenu = ctx.state.dto; // 已经经过校验的 DTO 对象
+    const success = await menuRoleService.deleteMenuRole(dto);
+    if (success) {
+      ctx.body = Result.ok('删除角色菜单权限成功');
+    } else {
+      ctx.body = Result.err('删除角色菜单权限失败');
+    }
+  }
 }
 
-exports = new RoleController();
+export default new RoleController();

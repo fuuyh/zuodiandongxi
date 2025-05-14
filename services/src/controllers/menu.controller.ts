@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 import Result from '../utils/result';
 import menuService from '../services/menu.service';
-import { MenuTree, Page } from '@/types';
+import { MenuTree, Menu as MenuType } from '@/types';
 
 class MenuController {
   // 获取所有菜单 分页
@@ -13,7 +13,7 @@ class MenuController {
   // }
   async getAllMenus(ctx: Context) {
     const menus = await menuService.getAllMenus();
-    ctx.body = Result.ok<MenuTree[]>('获取所有菜单成功', menus);
+    ctx.body = Result.ok<MenuType[]>('获取所有菜单成功', menus);
   }
   // 获取所有菜单树
   async getAllMenusTree(ctx: Context) {
@@ -24,7 +24,7 @@ class MenuController {
     const dto = ctx.state.dto; // 已经经过校验的 DTO 对象
     const success = await menuService.createMenu(dto);
     if (success) {
-      ctx.body = Result.ok('创建菜单成功');
+      ctx.body = Result.ok<string>('创建菜单成功');
     } else {
       ctx.status = 400;
       ctx.body = Result.err('创建菜单失败');
@@ -35,7 +35,7 @@ class MenuController {
     const dto = ctx.state.dto;
     const success = await menuService.updateMenu(dto);
     if (success) {
-      ctx.body = Result.ok('更新菜单成功');
+      ctx.body = Result.ok<string>('更新菜单成功');
     } else {
       ctx.body = Result.err('更新菜单失败');
     }
@@ -50,7 +50,7 @@ class MenuController {
     }
     const success = await menuService.deleteMenu(id);
     if (success) {
-      ctx.body = Result.ok('删除菜单成功');
+      ctx.body = Result.ok<string>('删除菜单成功');
     } else {
       ctx.body = Result.err('删除菜单失败');
     }

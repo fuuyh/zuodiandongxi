@@ -80,6 +80,6 @@ export interface UserRole {
 }
 // 用户登陆
 export interface UserLogin {
-  user_name: string;
+  username: string;
   password: string;
 }

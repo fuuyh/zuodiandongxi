@@ -15,7 +15,7 @@ class UserController {
     const id:string = ctx.query.id as string;
     if (!id) return Result.err('用户id不能为空')
     const user = await userService.getUserById(id);
-    ctx.body = Result.ok('获取用户详情成功', user);
+    ctx.body = Result.ok<UserType>('获取用户详情成功', user);
   }
   // 删除用户
   async deleteUser(ctx: Context) {
