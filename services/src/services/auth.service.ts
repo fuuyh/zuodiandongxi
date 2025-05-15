@@ -1,12 +1,11 @@
 import { hash,compare } from '../utils/bcrypt';
 import { uuid } from "../utils/genUUID";
 import { generateToken } from '../utils/jwt';
-import { UserLogin } from '@/types';
-import { UserEntity } from '../entities/User.entity';
+import { User as UserType,UserLogin } from '@/types';
 import User from '../models/User';
 
 // 注册用户
-async function registerUser(user:UserEntity):Promise<boolean> {
+async function registerUser(user:UserType):Promise<boolean> {
   const existingUser = await User.findByUsername(user.username);
   if (existingUser) return false;
   const hashedPassword = await hash(user.password as string);

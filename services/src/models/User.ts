@@ -1,19 +1,19 @@
 import { PrismaClient } from '@prisma/client'
 import { User as UserType, Page } from '@/types';
-import { UserEntity } from '../entities/User.entity';
 import { plainToInstance } from 'class-transformer';
+import { UserEntity } from '../entities/User.entity';
 
 const prisma = new PrismaClient();
 
 export default class User {
-  static async findById(id: string): Promise<UserEntity | null> {
+  static async findById(id: string): Promise<UserType | null> {
     const user = await prisma.sys_user.findUnique({ where: { id } });
     if (!user) return null;
     return plainToInstance(UserEntity, user);
   }
 
   // 根据用户名查询用户
-  static async findByUsername(username: string): Promise<UserEntity | null> {
+  static async findByUsername(username: string): Promise<UserType | null> {
     try {
       const user = await prisma.sys_user.findFirst({ where: { username } });
       if (!user) return null;
@@ -28,7 +28,7 @@ export default class User {
   static async findAll(
     pageNum: number,
     pageSize: number
-  ): Promise<Page<UserEntity>> {
+  ): Promise<Page<UserType>> {
     const [total, data] = await Promise.all([
       prisma.sys_user.count(),
       prisma.sys_user.findMany({
@@ -44,7 +44,7 @@ export default class User {
     };
   }
 
-  static async createUser(data: UserEntity): Promise<boolean> {
+  static async createUser(data: UserType): Promise<boolean> {
     try {
       // 确保 password 字段存在并为字符串类型
       if (!data.password) {
@@ -52,10 +52,7 @@ export default class User {
       }
   
       await prisma.sys_user.create({
-        data: {
-          ...data,
-          password: data.password, // 明确赋值，确保类型正确
-        },
+        data
       });
       return true;
     } catch (error) {
@@ -65,7 +62,7 @@ export default class User {
   }
 
   // 更新用户信息
-  static async updateUser(id: string, data: UserEntity): Promise<boolean> {
+  static async updateUser(id: string, data: UserType): Promise<boolean> {
     try {
       await prisma.sys_user.update({
         where: { id },

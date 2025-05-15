@@ -77,7 +77,7 @@ export default class Menu {
 
     // 给每个节点添加 children，并构建最终树
     for (const menu of menus) {
-      const parentId = menu.parent_id;
+      const parentId = menu.parentId;
       if (parentId && map.has(parentId)) {
         const parent = map.get(parentId)!;
         const treeMenu = menu as MenuTree;

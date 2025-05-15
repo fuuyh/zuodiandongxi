@@ -18,7 +18,7 @@ export class UserEntity {
   @IsString({ message: '昵称必须是字符串' })
   @IsNotEmpty({ message: '昵称不能为空' })
   @MaxLength(30, { message: '昵称不能超过30个字符' })
-  public nickname!: string;
+  public nickName!: string;
 
   @IsString({ message: '用户类型必须是字符串' })
   @IsOptional()

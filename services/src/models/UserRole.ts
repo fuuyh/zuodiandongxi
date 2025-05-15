@@ -7,8 +7,8 @@ export default class UserRole {
     try {
       await prisma.sys_user_role.create({
         data: {
-          user_id: data.user_id,
-          role_id: data.role_id,
+          userId: data.userId,
+          roleId: data.roleId,
         },
       });
       return true;
@@ -21,9 +21,9 @@ export default class UserRole {
     try {
       await prisma.sys_user_role.delete({
         where: {
-          user_id_role_id: {
-            user_id: data.user_id,
-            role_id: data.role_id,
+          userId_roleId: {
+            userId: data.userId,
+            roleId: data.roleId,
           }
         }
       });
@@ -39,7 +39,7 @@ export default class UserRole {
     try {
       const menuList = await prisma.sys_user_role.findMany({
         where: {
-          user_id: userId
+          userId
         }
       });
       return menuList;
